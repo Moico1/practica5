@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: .
+    env_file:
+      - ${ENV_FILE:-.env}
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
