@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     embedding_model: str = "models/gemini-embedding-001"
     embedding_dimensions: int = 3072
-    generation_model: str = "gemini-2.5-flash"
+    generation_model: str = "gemini-3.8-flash"
     http_timeout_seconds: float = 20.0
     max_retries: int = 3
     max_content_bytes: int = 5_000_000

@@ -10,7 +10,7 @@ SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
 GEMINI_API_KEY=tu_gemini_api_key
 EMBEDDING_MODEL=models/gemini-embedding-001
 EMBEDDING_DIMENSIONS=3072
-GENERATION_MODEL=gemini-2.5-flash
+GENERATION_MODEL=gemini-3.8-flash
 ```
 
 No compartas el archivo `.env` ni subas sus claves a Git.
@@ -42,7 +42,7 @@ El resultado esperado es `vector(3072)`. Si aparece `vector(2000)`, ejecuta nuev
 
 ## 3. Levantar la aplicación
 
-Desde `/home/firnt/moico777` ejecuta:
+Desde la raíz del proyecto ejecuta:
 
 ```bash
 docker compose up --build -d
@@ -106,6 +106,8 @@ curl --fail --show-error -X POST http://localhost:8000/api/consultar \
 
 La respuesta debe contener `respuesta` y `fuentes`.
 
+Para preparar las capturas de la entrega, sigue [docs/EVIDENCIAS.md](docs/EVIDENCIAS.md). Incluye únicamente resultados reales y nunca fotografíes el contenido de `.env`.
+
 ## 6. Demostrar aislamiento entre colecciones
 
 1. Ingresa documentos de un dominio con `coleccion_id=tributaria_2026`.
@@ -126,6 +128,7 @@ Prepara al menos 10 URLs públicas de tamaño parecido. Luego ejecuta:
 
 ```bash
 ENV_FILE=.env docker compose exec backend python scripts/benchmark.py \
+  --repetitions 3 \
   URL_1 URL_2 URL_3 URL_4 URL_5 \
   URL_6 URL_7 URL_8 URL_9 URL_10 \
   > benchmark.json
@@ -137,6 +140,8 @@ El benchmark ejecuta la ingesta completa con `p=1,2,4,8` y genera:
 - Speedup `S_p = T_1 / T_p`.
 - Eficiencia `E_p = S_p / p`.
 - Tiempo por fase.
+- Repeticiones individuales y mediana por cantidad de workers.
+- Metadatos del experimento y porcentajes por fase.
 
 Usa [docs/INFORME_RENDIMIENTO.md](docs/INFORME_RENDIMIENTO.md) para completar el informe de máximo cinco páginas.
 
@@ -173,7 +178,7 @@ Muestra al docente esta secuencia:
 6. SQL Editor: muestra el índice B-Tree y la línea `where n.coleccion_id = match_collection`.
 7. Aislamiento: consulta dos colecciones con documentos diferentes y enseña sus fuentes separadas.
 8. `docker compose exec -T backend pytest -q`: resultado esperado, `7 passed`.
-9. `benchmark.json`: explica `T_p`, speedup, eficiencia y el límite de Amdahl.
+9. `benchmark.json`: explica `T_p`, speedup, eficiencia, overhead, Ley de Amdahl y análisis complementario de Gustafson.
 
 | Criterio | Evidencia para obtener el puntaje completo |
 |---|---|

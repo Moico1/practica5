@@ -1,0 +1,107 @@
+{
+  "experiment": {
+    "started_at_utc": "2026-10-08T19:27:12.366860+00:00",
+    "urls_count": 10,
+    "workers": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "repetitions": 1,
+    "chunk_size": 5000,
+    "chunk_overlap": 0,
+    "embedding_batch_size": 100,
+    "baseline": "workers=1",
+    "formulas": {
+      "speedup": "T_1 / T_p",
+      "efficiency": "speedup / p"
+    }
+  },
+  "measurements": [
+    {
+      "workers": 1,
+      "time_seconds": 7.2247,
+      "run_times_seconds": [
+        7.2247
+      ],
+      "speedup": 1.0,
+      "efficiency": 1.0,
+      "phases": {
+        "scraping_red": 3.602,
+        "chunking_cpu": 0.003,
+        "api_embeddings": 1.384,
+        "insercion_supabase": 2.235
+      },
+      "phase_percentages": {
+        "scraping_red": 49.86,
+        "chunking_cpu": 0.05,
+        "api_embeddings": 19.16,
+        "insercion_supabase": 30.93
+      }
+    },
+    {
+      "workers": 2,
+      "time_seconds": 4.638,
+      "run_times_seconds": [
+        4.638
+      ],
+      "speedup": 1.5577,
+      "efficiency": 0.7789,
+      "phases": {
+        "scraping_red": 1.817,
+        "chunking_cpu": 0.003,
+        "api_embeddings": 1.289,
+        "insercion_supabase": 1.528
+      },
+      "phase_percentages": {
+        "scraping_red": 39.18,
+        "chunking_cpu": 0.07,
+        "api_embeddings": 27.8,
+        "insercion_supabase": 32.95
+      }
+    },
+    {
+      "workers": 4,
+      "time_seconds": 4.1182,
+      "run_times_seconds": [
+        4.1182
+      ],
+      "speedup": 1.7543,
+      "efficiency": 0.4386,
+      "phases": {
+        "scraping_red": 1.274,
+        "chunking_cpu": 0.004,
+        "api_embeddings": 1.303,
+        "insercion_supabase": 1.537
+      },
+      "phase_percentages": {
+        "scraping_red": 30.93,
+        "chunking_cpu": 0.1,
+        "api_embeddings": 31.65,
+        "insercion_supabase": 37.32
+      }
+    },
+    {
+      "workers": 8,
+      "time_seconds": 4.1208,
+      "run_times_seconds": [
+        4.1208
+      ],
+      "speedup": 1.7532,
+      "efficiency": 0.2192,
+      "phases": {
+        "scraping_red": 1.076,
+        "chunking_cpu": 0.006,
+        "api_embeddings": 1.316,
+        "insercion_supabase": 1.722
+      },
+      "phase_percentages": {
+        "scraping_red": 26.12,
+        "chunking_cpu": 0.15,
+        "api_embeddings": 31.95,
+        "insercion_supabase": 41.78
+      }
+    }
+  ]
+}

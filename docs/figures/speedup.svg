@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440">
+<rect width="100%" height="100%" fill="white"/>
+<text x="380.0" y="25" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold">Speedup de la ingesta</text>
+<text x="18" y="220.0" transform="rotate(-90 18 220.0)" text-anchor="middle" font-family="sans-serif" font-size="13">Speedup</text>
+<line x1="70" y1="45" x2="70" y2="370" stroke="#333"/>
+<line x1="70" y1="370" x2="735" y2="370" stroke="#333"/>
+<text x="70.0" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">1</text>
+<text x="291.66666666666663" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">2</text>
+<text x="513.3333333333333" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">4</text>
+<text x="735.0" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">8</text>
+<polyline points="70.0,334.67391304347825 291.66666666666663,299.3478260869565 513.3333333333333,228.69565217391303 735.0,87.39130434782606" fill="none" stroke="#888" stroke-width="3" stroke-dasharray="6 4"/>
+<circle cx="70.0" cy="334.67391304347825" r="4" fill="#888"/>
+<circle cx="291.66666666666663" cy="299.3478260869565" r="4" fill="#888"/>
+<circle cx="513.3333333333333" cy="228.69565217391303" r="4" fill="#888"/>
+<circle cx="735.0" cy="87.39130434782606" r="4" fill="#888"/>
+<polyline points="70.0,334.67391304347825 291.66666666666663,314.9725543478261 513.3333333333333,308.0274456521739 735.0,308.0663043478261" fill="none" stroke="#2563eb" stroke-width="3" />
+<circle cx="70.0" cy="334.67391304347825" r="4" fill="#2563eb"/>
+<circle cx="291.66666666666663" cy="314.9725543478261" r="4" fill="#2563eb"/>
+<circle cx="513.3333333333333" cy="308.0274456521739" r="4" fill="#2563eb"/>
+<circle cx="735.0" cy="308.0663043478261" r="4" fill="#2563eb"/>
+</svg>

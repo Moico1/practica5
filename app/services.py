@@ -58,7 +58,7 @@ class RAGService:
             async def bounded(url: str) -> DownloadedPage:
                 async with semaphore:
                     return await self._download(client, url)
-            return await asyncio.gather(*(bounded(url) for url in urls))
+            return await asyncio.gather(*(bounded(url) for url in unique_urls))
 
     async def _embed_batch(self, texts: list[str]) -> list[list[float]]:
         self._require_integrations()
@@ -86,6 +86,27 @@ class RAGService:
                     raise RuntimeError(f"Error generando embeddings: {exc}") from exc
                 await asyncio.sleep(2**attempt)
         return []
+
+    async def _generate_answer(self, prompt: str) -> str:
+        self._require_integrations()
+        for attempt in range(self.settings.max_retries):
+            try:
+                response = await asyncio.to_thread(
+                    self.genai_client.models.generate_content,
+                    model=self.settings.generation_model,
+                    contents=prompt,
+                    config={"temperature": 0.0},
+                )
+                return response.text
+            except Exception as exc:
+                message = str(exc).upper()
+                retryable = any(token in message for token in ("429", "503", "UNAVAILABLE", "RESOURCE_EXHAUSTED", "TIMEOUT"))
+                if not retryable:
+                    raise RuntimeError(f"Error no recuperable generando la respuesta: {exc}") from exc
+                if attempt == self.settings.max_retries - 1:
+                    raise RuntimeError(f"Error temporal de Gemini generando la respuesta: {exc}") from exc
+                await asyncio.sleep(2**attempt)
+        raise RuntimeError("No se pudo generar la respuesta")
 
     async def ingest(self, request: IngestRequest) -> dict:
         self._require_integrations()
@@ -125,8 +146,8 @@ class RAGService:
                 message = str(exc)
                 if "dimension" in message.lower():
                     raise RuntimeError(
-                        "La columna embedding de Supabase no coincide con Gemini. "
-                        "Verifica que sea vector(3072) y ejecuta la migración actualizada."
+                        "Supabase rechazó el embedding por un problema de dimensión. "
+                        f"Detalle devuelto por Supabase: {message}"
                     ) from exc
                 raise RuntimeError(f"Error insertando en Supabase: {message}") from exc
             phase_times["insercion_supabase"] += time.perf_counter() - insertion_started
@@ -156,5 +177,5 @@ class RAGService:
             return {"respuesta": "La colección solicitada no contiene antecedentes relevantes para esta consulta.", "fuentes": []}
         context = "\n\n".join(f"Fuente: {item['fuente_url']}\n{item['contenido']}" for item in sources)
         prompt = f"Responde únicamente con el contexto de la colección {request.coleccion_id}. Si no hay respuesta explícita, declara que no hay antecedentes. No inventes datos.\n\nContexto:\n{context}\n\nPregunta: {request.pregunta}"
-        response = await asyncio.to_thread(self.genai_client.models.generate_content, model=self.settings.generation_model, contents=prompt, config={"temperature": 0.0})
-        return {"respuesta": response.text, "fuentes": sources}
+        answer = await self._generate_answer(prompt)
+        return {"respuesta": answer, "fuentes": sources}

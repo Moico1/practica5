@@ -15,9 +15,6 @@ alter table public.normativa_bancaria enable row level security;
 create index if not exists normativa_bancaria_coleccion_idx
   on public.normativa_bancaria using btree (coleccion_id);
 
-create index if not exists normativa_bancaria_embedding_idx
-  on public.normativa_bancaria using hnsw (embedding vector_cosine_ops);
-
 create or replace function public.match_normativa_coleccion(
   query_embedding vector(3072),
   match_collection varchar(50),

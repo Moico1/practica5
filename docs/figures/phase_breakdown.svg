@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="440">
+<rect width="100%" height="100%" fill="white"/>
+<text x="380.0" y="25" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold">Desglose temporal por fase</text>
+<text x="18" y="220.0" transform="rotate(-90 18 220.0)" text-anchor="middle" font-family="sans-serif" font-size="13">Porcentaje del tiempo</text>
+<line x1="70" y1="45" x2="70" y2="370" stroke="#333"/>
+<line x1="70" y1="370" x2="735" y2="370" stroke="#333"/>
+<rect x="115.625" y="207.955" width="75" height="162.045" fill="#2563eb"/>
+<rect x="115.625" y="207.79250000000002" width="75" height="0.1625" fill="#16a34a"/>
+<rect x="115.625" y="145.52250000000004" width="75" height="62.269999999999996" fill="#d97706"/>
+<rect x="115.625" y="45.00000000000003" width="75" height="100.52250000000001" fill="#dc2626"/>
+<text x="153.125" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">1</text>
+<rect x="281.875" y="242.66500000000002" width="75" height="127.335" fill="#2563eb"/>
+<rect x="281.875" y="242.43750000000003" width="75" height="0.22750000000000004" fill="#16a34a"/>
+<rect x="281.875" y="152.08750000000003" width="75" height="90.35000000000001" fill="#d97706"/>
+<rect x="281.875" y="45.00000000000003" width="75" height="107.0875" fill="#dc2626"/>
+<text x="319.375" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">2</text>
+<rect x="448.125" y="269.47749999999996" width="75" height="100.52250000000001" fill="#2563eb"/>
+<rect x="448.125" y="269.1525" width="75" height="0.325" fill="#16a34a"/>
+<rect x="448.125" y="166.28999999999996" width="75" height="102.8625" fill="#d97706"/>
+<rect x="448.125" y="44.99999999999997" width="75" height="121.28999999999999" fill="#dc2626"/>
+<text x="485.625" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">4</text>
+<rect x="614.375" y="285.11" width="75" height="84.89" fill="#2563eb"/>
+<rect x="614.375" y="284.6225" width="75" height="0.4875" fill="#16a34a"/>
+<rect x="614.375" y="180.785" width="75" height="103.8375" fill="#d97706"/>
+<rect x="614.375" y="45.0" width="75" height="135.785" fill="#dc2626"/>
+<text x="651.875" y="395" text-anchor="middle" font-family="sans-serif" font-size="12">8</text>
+</svg>

@@ -10,6 +10,8 @@ begin
     raise exception 'La tabla contiene % filas. Exporta o elimina los embeddings antes de cambiar la dimensión.', existing_rows;
   end if;
 
+  drop index if exists public.normativa_bancaria_embedding_idx;
+
   alter table public.normativa_bancaria
     alter column embedding type vector(3072);
 end $$;
