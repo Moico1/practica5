@@ -27,7 +27,7 @@ y solo después ordena por distancia coseno. La prueba `tests/test_rpc_contract.
 
 ## 3. Experimento y metodología
 
-Usa 10 URLs de tamaño similar, preferentemente del mismo portal y con contenido público estable. Ejecuta:
+Usa 10 URLs de tamaño similar, preferentemente del mismo portal y con contenido público estable. El resultado entregado se ejecutó con una repetición por nivel debido a la cuota de la API; para una nueva campaña puedes usar tres repeticiones:
 
 ```bash
 python3 scripts/benchmark.py --repetitions 3 URL_1 URL_2 URL_3 URL_4 URL_5 URL_6 URL_7 URL_8 URL_9 URL_10 > benchmark.json
@@ -42,7 +42,7 @@ El script ejecuta la ingesta completa con `p = 1, 2, 4, 8`. Para cada valor regi
 | 4 | 4.1182 | 1.7543 | 0.4386 |
 | 8 | 4.1208 | 1.7532 | 0.2192 |
 
-La medición real se ejecutó el 2026-10-08 con 10 URLs públicas, una repetición por nivel, `chunk_size=5000`, `chunk_overlap=0` y `embedding_batch_size=100`. Los valores se obtuvieron de `benchmark.json`; no son estimaciones.
+La medición real se ejecutó el 2026-10-08 con 10 URLs públicas, una repetición por nivel, `chunk_size=5000`, `chunk_overlap=0` y `embedding_batch_size=100`. Los valores se obtuvieron de `benchmark.json`; no son estimaciones. La repetición única es una limitación experimental declarada; no se presentan promedios ni intervalos que no hayan sido medidos.
 
 ## 4. Fundamento teórico
 

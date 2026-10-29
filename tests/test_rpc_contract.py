@@ -6,6 +6,8 @@ SCHEMA = Path(__file__).parents[1] / "supabase" / "schema.sql"
 
 def test_rpc_filters_by_collection_before_similarity_ordering():
     sql = SCHEMA.read_text()
+    assert "language plpgsql stable" in sql.lower()
+    assert "return query" in sql.lower()
     assert "where n.coleccion_id = match_collection" in sql.lower()
     assert "order by n.embedding <=> query_embedding" in sql.lower()
 

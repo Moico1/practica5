@@ -77,6 +77,8 @@ where n.coleccion_id = match_collection
 order by n.embedding <=> query_embedding
 ```
 
+La definición debe indicar `language plpgsql stable` y contener `return query`.
+
 ### 05. Ingesta y métricas por fase
 
 Ejecuta una ingesta real:

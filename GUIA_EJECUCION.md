@@ -23,6 +23,8 @@ No compartas el archivo `.env` ni subas sus claves a Git.
 2. Copia todo el contenido de `supabase/schema.sql`.
 3. Pulsa **Run**.
 
+Si ya habías ejecutado una versión anterior, vuelve a ejecutar el bloque de la función `match_normativa_coleccion` para actualizarla a `language plpgsql`; después de eso toma la captura de la RPC.
+
 ### Proyecto donde se ejecutó una versión anterior
 
 Si anteriormente ejecutaste la versión que usaba `vector(2000)`, ejecuta `supabase/migrate_embedding_dimensions.sql`.

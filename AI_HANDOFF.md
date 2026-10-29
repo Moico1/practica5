@@ -16,7 +16,7 @@ Este repositorio implementa una práctica de Sistemas Paralelos y Distribuidos: 
 - Inserción en Supabase por lotes.
 - Consulta RAG filtrada obligatoriamente por `coleccion_id`.
 - Generación con temperatura 0.0 y respuesta explícita cuando no existen antecedentes.
-- SQL con índice B-Tree, búsqueda exacta por distancia coseno y RPC `match_normativa_coleccion`.
+- SQL con índice B-Tree, búsqueda exacta por distancia coseno y RPC `match_normativa_coleccion` en PL/pgSQL.
 - Docker Compose funcional.
 - Suite dentro del contenedor: `7 passed`.
 - Healthcheck verificado: `{"status":"ok"}`.

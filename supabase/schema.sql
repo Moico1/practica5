@@ -27,14 +27,17 @@ returns table (
   chunk_index integer,
   similarity double precision
 )
-language sql stable
+language plpgsql stable
 security invoker
 set search_path = public
 as $$
+begin
+  return query
   select n.id, n.contenido, n.fuente_url, n.chunk_index,
          1 - (n.embedding <=> query_embedding) as similarity
   from public.normativa_bancaria n
   where n.coleccion_id = match_collection
   order by n.embedding <=> query_embedding
   limit least(greatest(match_count, 1), 100);
+end;
 $$;
