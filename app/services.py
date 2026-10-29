@@ -106,10 +106,17 @@ class RAGService:
                 return response.text
             except Exception as exc:
                 message = str(exc).upper()
-                retryable = any(token in message for token in ("429", "503", "UNAVAILABLE", "RESOURCE_EXHAUSTED", "TIMEOUT"))
+                retryable = isinstance(exc, asyncio.TimeoutError) or any(
+                    token in message for token in ("429", "503", "UNAVAILABLE", "RESOURCE_EXHAUSTED", "TIMEOUT")
+                )
                 if not retryable:
                     raise RuntimeError(f"Error no recuperable generando la respuesta: {exc}") from exc
                 if attempt == self.settings.max_retries - 1:
+                    if isinstance(exc, asyncio.TimeoutError):
+                        raise RuntimeError(
+                            "Gemini agotó el tiempo máximo generando la respuesta. "
+                            "Intenta nuevamente o reduce el contexto recuperado."
+                        ) from exc
                     raise RuntimeError(f"Error temporal de Gemini generando la respuesta: {exc}") from exc
                 await asyncio.sleep(2**attempt)
         raise RuntimeError("No se pudo generar la respuesta")

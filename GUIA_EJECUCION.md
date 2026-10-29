@@ -11,7 +11,7 @@ GEMINI_API_KEY=tu_gemini_api_key
 EMBEDDING_MODEL=models/gemini-embedding-001
 EMBEDDING_DIMENSIONS=3072
 GENERATION_MODEL=gemini-3.8-flash
-GEMINI_TIMEOUT_SECONDS=60
+GEMINI_TIMEOUT_SECONDS=20
 ```
 
 No compartas el archivo `.env` ni subas sus claves a Git.
