@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     embedding_dimensions: int = 3072
     generation_model: str = "gemini-3.8-flash"
     http_timeout_seconds: float = 20.0
+    gemini_timeout_seconds: float = 60.0
     max_retries: int = 3
     max_content_bytes: int = 5_000_000
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")

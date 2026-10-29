@@ -64,10 +64,13 @@ class RAGService:
         self._require_integrations()
         for attempt in range(self.settings.max_retries):
             try:
-                result = await asyncio.to_thread(
-                    self.genai_client.models.embed_content,
-                    model=self.settings.embedding_model,
-                    contents=texts,
+                result = await asyncio.wait_for(
+                    asyncio.to_thread(
+                        self.genai_client.models.embed_content,
+                        model=self.settings.embedding_model,
+                        contents=texts,
+                    ),
+                    timeout=self.settings.gemini_timeout_seconds,
                 )
                 embeddings = [embedding.values for embedding in result.embeddings]
                 if any(len(values) != self.settings.embedding_dimensions for values in embeddings):
@@ -91,11 +94,14 @@ class RAGService:
         self._require_integrations()
         for attempt in range(self.settings.max_retries):
             try:
-                response = await asyncio.to_thread(
-                    self.genai_client.models.generate_content,
-                    model=self.settings.generation_model,
-                    contents=prompt,
-                    config={"temperature": 0.0},
+                response = await asyncio.wait_for(
+                    asyncio.to_thread(
+                        self.genai_client.models.generate_content,
+                        model=self.settings.generation_model,
+                        contents=prompt,
+                        config={"temperature": 0.0},
+                    ),
+                    timeout=self.settings.gemini_timeout_seconds,
                 )
                 return response.text
             except Exception as exc:
